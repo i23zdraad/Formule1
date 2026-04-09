@@ -1,0 +1,13 @@
+<h1>Seznam zvířat</h1> 
+<% animals.forEach(animal => { %> 
+<div> 
+<h2> 
+<a href="/animals/<%= animal._id %>"> 
+<%= animal.name %> 
+</a> 
+</h2> 
+<p>Druh: <%= animal.species %></p> 
+<p>Věk: <%= animal.age %></p> 
+</div> 
+<hr> 
+<% }) %> 
