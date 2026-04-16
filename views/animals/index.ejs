@@ -1,3 +1,12 @@
+
+<% if (user) { %>
+    <form action="/logout" method="POST">
+    <button>Odhlásit se</button>
+    </form>
+   <% } else { %>
+    <a href="/login">Login</a>
+   <% } %>
+   
 <h1>Seznam zvířat</h1> 
 <% animals.forEach(animal => { %> 
 <div> 
