@@ -1,0 +1,12 @@
+<h1>Upravit zvíře</h1>
+<form action="/animals/<%= animal._id %>?_method=PUT" method="POST">
+ <input type="text" name="name" value="<%= animal.name %>" required>
+ <br><br>
+ <input type="text" name="species" value="<%= animal.species %>" required>
+ <br><br>
+ <input type="number" name="age" value="<%= animal.age %>" required>
+ <br><br>
+ <textarea name="description" required><%= animal.description %></textarea>
+ <br><br>
+ <button type="submit">Uložit změny</button>
+</form>
