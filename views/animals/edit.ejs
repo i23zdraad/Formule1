@@ -1,5 +1,7 @@
 <h1>Upravit zvíře</h1>
-<form action="/animals/<%= animal._id %>?_method=PUT" method="POST">
+<form action="/animals/<%= animal._id %>?_method=PUT" method="POST"
+    enctype="multipart/form-data">
+    
  <input type="text" name="name" value="<%= animal.name %>" required>
  <br><br>
  <input type="text" name="species" value="<%= animal.species %>" required>
@@ -7,6 +9,7 @@
  <input type="number" name="age" value="<%= animal.age %>" required>
  <br><br>
  <textarea name="description" required><%= animal.description %></textarea>
+ <input type="file" name="image">
  <br><br>
  <button type="submit">Uložit změny</button>
 </form>

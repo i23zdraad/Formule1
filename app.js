@@ -4,6 +4,8 @@ const express = require("express");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const animalRoutes = require("./routes/animalRoutes");
+const adoptionRoutes = require("./routes/adoptionRoutes"); 
+const adminRoutes = require("./routes/adminRoutes"); 
 
 
 const path = require("path");
@@ -31,6 +33,9 @@ app.use(session({
    
 app.use("/", authRoutes);
 app.use("/animals", animalRoutes);
+app.use("/adoptions", adoptionRoutes); 
+app.use("/admin", adminRoutes); 
+
 app.get("/", (req, res) => {
     res.redirect("/animals"); 
 });

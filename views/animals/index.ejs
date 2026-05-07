@@ -6,7 +6,12 @@
    <% } else { %>
     <a href="/login">Login</a>
    <% } %>
-   
+   <% if (user) { %> 
+    <a href="/adoptions">Žádosti o adopci</a> 
+    <% } %> 
+    <% if (user && user.role === "admin") { %> 
+        <a href="/admin/users">Správa uživatelů</a> 
+        <% } %>
 <h1>Seznam zvířat</h1> 
 <% animals.forEach(animal => { %> 
 <div> 
@@ -16,7 +21,10 @@
 </a> 
 </h2> 
 <p>Druh: <%= animal.species %></p> 
-<p>Věk: <%= animal.age %></p> 
+<p>Věk: <%= animal.age %></p>
+<% if (animal.image) { %>
+    <img src="/uploads/<%= animal.image %>" width="200">
+   <% } %> 
 </div> 
 <hr> 
 <% }) %> 

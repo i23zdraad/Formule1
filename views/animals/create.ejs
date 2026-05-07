@@ -1,5 +1,5 @@
 <h1>Přidat zvíře</h1>
-<form action="/animals" method="POST">
+<form action="/animals" method="POST" enctype="multipart/form-data"></form>
  <input type="text" name="name" placeholder="Jméno" required>
  <br><br>
  <input type="text" name="species" placeholder="Druh" required>
@@ -7,6 +7,7 @@
  <input type="number" name="age" placeholder="Věk" required>
  <br><br>
  <textarea name="description" placeholder="Popis" required></textarea>
+ <input type="file" name="image">
  <br><br>
  <button type="submit">Uložit</button>
 </form>
