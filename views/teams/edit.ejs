@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Upravit tým</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include("../partials/navbar") %>
+
+  <div class="container">
+    <h1>Upravit tým</h1>
+    <form action="/teams/<%= team._id %>?_method=PUT" method="POST" enctype="multipart/form-data" class="form">
+      <input type="text" name="name" value="<%= team.name %>" required>
+      <input type="text" name="country" value="<%= team.country %>" required>
+      <input type="number" name="founded" value="<%= team.founded %>">
+      <textarea name="description" required><%= team.description %></textarea>
+
+      <label style="color:#aaa; margin-bottom:0.3rem; display:block;">
+        Logo týmu <% if (team.logo) { %>(aktuální: <%= team.logo %>)<% } %>:
+      </label>
+      <input type="file" name="logo" accept="image/*">
+
+      <label style="color:#aaa; margin-bottom:0.3rem; display:block;">
+        Monopost / tým <% if (team.carImage) { %>(aktuální: <%= team.carImage %>)<% } %>:
+      </label>
+      <input type="file" name="carImage" accept="image/*">
+
+      <button type="submit" class="btn">Uložit změny</button>
+    </form>
+    <p style="margin-top:1rem"><a href="/teams/<%= team._id %>">Zpět na detail</a></p>
+  </div>
+</body>
+</html>

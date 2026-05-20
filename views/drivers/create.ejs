@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Nový jezdec</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Přidat jezdce</h1>
+    <form action="/drivers" method="POST" enctype="multipart/form-data" class="form">
+      <input type="text" name="name" placeholder="Jméno jezdce" required>
+      <input type="text" name="nationality" placeholder="Národnost" required>
+      <input type="number" name="age" placeholder="Věk" required>
+      <input type="number" name="number" placeholder="Startovní číslo" required>
+
+      <select name="team" required>
+        <option value="">Vyber tým</option>
+        <% teams.forEach(t => { %>
+          <option value="<%= t._id %>"><%= t.name %></option>
+        <% }) %>
+      </select>
+
+      <textarea name="description" placeholder="Popis jezdce" required></textarea>
+      <input type="file" name="image" accept="image/*">
+      <button type="submit" class="btn">Uložit jezdce</button>
+    </form>
+    <p style="margin-top:1rem"><a href="/drivers">Zpět</a></p>
+  </div>
+</body>
+</html>

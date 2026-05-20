@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title><%= circuit.name %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/circuits" class="logo">F1 Tracker</a>
+    <div class="links">
+      <a href="/circuits">Okruhy</a>
+      <a href="/drivers">Jezdci</a>
+      <a href="/teams">Týmy</a>
+      <% if (user) { %>
+        <form action="/logout" method="POST" class="inline-form">
+          <button class="btn-link">Odhlašit (<%= user.username %>)</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Přihlásit se</a>
+      <% } %>
+    </div>
+  </nav>
+
+  <div class="container detail">
+    <% if (circuit.image) { %>
+      <img src="/uploads/<%= circuit.image %>" class="detail-img">
+    <% } %>
+    <h1><%= circuit.name %></h1>
+    <p class="subtitle"><%= circuit.country %> | <%= circuit.length %> km | <%= circuit.laps %> kol</p>
+    <p><%= circuit.description %></p>
+
+    <% if (user) { %>
+      <div class="actions">
+        <a href="/circuits/<%= circuit._id %>/edit" class="btn">Upravit</a>
+        <form action="/circuits/<%= circuit._id %>?_method=DELETE" method="POST" class="inline-form">
+          <button class="btn btn-danger">Smazat</button>
+        </form>
+      </div>
+    <% } %>
+    <p style="margin-top:1rem"><a href="/circuits">← Zpět na okruhy</a></p>
+  </div>
+</body>
+</html>

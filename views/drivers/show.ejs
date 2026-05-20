@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title><%= driver.name %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/circuits" class="logo">F1 Tracker</a>
+    <div class="links">
+      <a href="/circuits">Okruhy</a>
+      <a href="/drivers">Jezdci</a>
+      <a href="/teams">Týmy</a>
+      <% if (user) { %>
+        <form action="/logout" method="POST" class="inline-form">
+          <button class="btn-link">Odhlašit (<%= user.username %>)</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Přihlásit se</a>
+      <% } %>
+    </div>
+  </nav>
+
+  <div class="container detail">
+    <% if (driver.image) { %>
+      <img src="/uploads/<%= driver.image %>" class="detail-img">
+    <% } %>
+    <h1><%= driver.name %></h1>
+    <p class="subtitle">
+      <%= driver.nationality %> | #<%= driver.number %> | <%= driver.age %> let
+    </p>
+    <p>
+      Tým:
+      <% if (driver.team) { %>
+        <a href="/teams/<%= driver.team._id %>"><%= driver.team.name %></a>
+      <% } else { %>-<% } %>
+    </p>
+    <p><%= driver.description %></p>
+
+    <% if (user) { %>
+      <div class="actions">
+        <a href="/drivers/<%= driver._id %>/edit" class="btn">Upravit</a>
+        <form action="/drivers/<%= driver._id %>?_method=DELETE" method="POST" class="inline-form">
+          <button class="btn btn-danger">Smazat</button>
+        </form>
+      </div>
+    <% } %>
+    <p style="margin-top:1rem"><a href="/drivers">← Zpět na jezdce</a></p>
+  </div>
+</body>
+</html>

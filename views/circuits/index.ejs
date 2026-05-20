@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Okruhy F1</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include("../partials/navbar") %>
+
+  <div class="container">
+    <h1>Okruhy Formule 1</h1>
+    <div class="grid">
+      <% circuits.forEach(c => { %>
+        <div class="card">
+          <% if (c.image) { %>
+            <img src="/uploads/<%= c.image %>" alt="<%= c.name %>">
+          <% } else { %>
+            <div class="no-image">F1</div>
+          <% } %>
+          <h2><a href="/circuits/<%= c._id %>"><%= c.name %></a></h2>
+          <p><%= c.country %></p>
+          <p class="meta"><%= c.length %> km | <%= c.laps %> kol</p>
+          
+          <% if (user) { %>
+            <div class="card-actions">
+              <a href="/circuits/<%= c._id %>/edit" class="btn btn-small">Upravit</a>
+              <form action="/circuits/<%= c._id %>?_method=DELETE" method="POST" class="inline-form">
+                <button class="btn btn-small btn-danger">Smazat</button>
+              </form>
+            </div>
+          <% } %>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</body>
+</html>

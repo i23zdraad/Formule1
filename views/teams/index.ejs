@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Týmy F1</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include("../partials/navbar") %>
+
+  <div class="container">
+    <h1>Týmy Formule 1</h1>
+    <div class="grid">
+      <% teams.forEach(t => { %>
+        <div class="card">
+          <div class="card-images">
+            <% if (t.logo) { %>
+              <img src="/uploads/<%= t.logo %>" alt="Logo <%= t.name %>">
+            <% } else { %>
+              <div class="no-image">Logo</div>
+            <% } %>
+            <% if (t.carImage) { %>
+              <img src="/uploads/<%= t.carImage %>" alt="Monopost <%= t.name %>">
+            <% } else { %>
+              <div class="no-image">Auto</div>
+            <% } %>
+          </div>
+          <h2><a href="/teams/<%= t._id %>"><%= t.name %></a></h2>
+          <p><%= t.country %></p>
+          <p class="meta">Založeno: <%= t.founded %></p>
+
+          <% if (user) { %>
+            <div class="card-actions">
+              <a href="/teams/<%= t._id %>/edit" class="btn btn-small">Upravit</a>
+              <form action="/teams/<%= t._id %>?_method=DELETE" method="POST" class="inline-form">
+                <button class="btn btn-small btn-danger">Smazat</button>
+              </form>
+            </div>
+          <% } %>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</body>
+</html>

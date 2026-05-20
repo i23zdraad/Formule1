@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Upravit okruh</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Upravit okruh</h1>
+    <form action="/circuits/<%= circuit._id %>?_method=PUT" method="POST" enctype="multipart/form-data" class="form">
+      <input type="text" name="name" value="<%= circuit.name %>" required>
+      <input type="text" name="country" value="<%= circuit.country %>" required>
+      <input type="number" step="0.001" name="length" value="<%= circuit.length %>" required>
+      <input type="number" name="laps" value="<%= circuit.laps %>" required>
+      <textarea name="description" required><%= circuit.description %></textarea>
+      <input type="file" name="image" accept="image/*">
+      <button type="submit" class="btn">Uložit změny</button>
+    </form>
+    <p style="margin-top:1rem"><a href="/circuits/<%= circuit._id %>">Zpět na detail</a></p>
+  </div>
+</body>
+</html>

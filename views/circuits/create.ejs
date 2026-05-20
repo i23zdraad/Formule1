@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Nový okruh</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Přidat okruh</h1>
+    <form action="/circuits" method="POST" enctype="multipart/form-data" class="form">
+      <input type="text" name="name" placeholder="Název okruhu (např. Silverstone)" required>
+      <input type="text" name="country" placeholder="Země (např. Velká Británie)" required>
+      <input type="number" step="0.001" name="length" placeholder="Délka v km" required>
+      <input type="number" name="laps" placeholder="Počet kol závodu" required>
+      <textarea name="description" placeholder="Popis okruhu" required></textarea>
+      <input type="file" name="image" accept="image/*">
+      <button type="submit" class="btn">Uložit okruh</button>
+    </form>
+    <p style="margin-top:1rem"><a href="/circuits">Zpět</a></p>
+  </div>
+</body>
+</html>

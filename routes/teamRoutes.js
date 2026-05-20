@@ -12,12 +12,20 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.get("/", teamController.getAllTeams);
-router.get("/:id", teamController.getTeamDetail);
 
 router.get("/create", requireLogin, teamController.showCreateForm);
-router.post("/", requireLogin, upload.single("image"), teamController.createTeam);
+router.post("/", requireLogin, upload.fields([
+  { name: "logo", maxCount: 1 },
+  { name: "carImage", maxCount: 1 }
+]), teamController.createTeam);
+
 router.get("/:id/edit", requireLogin, teamController.showEditForm);
-router.put("/:id", requireLogin, upload.single("image"), teamController.updateTeam);
+router.put("/:id", requireLogin, upload.fields([
+  { name: "logo", maxCount: 1 },
+  { name: "carImage", maxCount: 1 }
+]), teamController.updateTeam);
 router.delete("/:id", requireLogin, teamController.deleteTeam);
+
+router.get("/:id", teamController.getTeamDetail);
 
 module.exports = router;

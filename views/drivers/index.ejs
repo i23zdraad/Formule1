@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Jezdci F1</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include("../partials/navbar") %>
+
+  <div class="container">
+    <h1>Jezdci Formule 1</h1>
+    <div class="grid">
+      <% drivers.forEach(d => { %>
+        <div class="card">
+          <% if (d.image) { %>
+            <img src="/uploads/<%= d.image %>" alt="<%= d.name %>">
+          <% } else { %>
+            <div class="no-image">#<%= d.number %></div>
+          <% } %>
+          <h2><a href="/drivers/<%= d._id %>"><%= d.name %></a></h2>
+          <p><%= d.nationality %></p>
+          <p class="meta">
+            <%= d.team ? d.team.name : '-' %> | #<%= d.number %>
+          </p>
+
+          <% if (user) { %>
+            <div class="card-actions">
+              <a href="/drivers/<%= d._id %>/edit" class="btn btn-small">Upravit</a>
+              <form action="/drivers/<%= d._id %>?_method=DELETE" method="POST" class="inline-form">
+                <button class="btn btn-small btn-danger">Smazat</button>
+              </form>
+            </div>
+          <% } %>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</body>
+</html>

@@ -12,12 +12,14 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.get("/", driverController.getAllDrivers);
-router.get("/:id", driverController.getDriverDetail);
 
 router.get("/create", requireLogin, driverController.showCreateForm);
 router.post("/", requireLogin, upload.single("image"), driverController.createDriver);
+
 router.get("/:id/edit", requireLogin, driverController.showEditForm);
 router.put("/:id", requireLogin, upload.single("image"), driverController.updateDriver);
 router.delete("/:id", requireLogin, driverController.deleteDriver);
+
+router.get("/:id", driverController.getDriverDetail);
 
 module.exports = router;

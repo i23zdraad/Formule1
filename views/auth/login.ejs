@@ -1,6 +1,31 @@
-<h1>Přihlášení</h1>
-<form action="/login" method="POST">
- <input type="text" name="username" placeholder="Uživatelské jméno" required>
- <input type="password" name="password" placeholder="Heslo" required>
- <button type="submit">Přihlásit</button>
-</form>
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Přihlášení – F1 Tracker</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/circuits" class="logo">F1 Tracker</a>
+    <div class="links">
+      <a href="/circuits">Okruhy</a>
+      <a href="/drivers">Jezdci</a>
+      <a href="/teams">Týmy</a>
+      <a href="/register">Registrovat se</a>
+    </div>
+  </nav>
+
+  <div class="auth-box">
+    <h1>Přihlášení</h1>
+    <form action="/login" method="POST" class="form">
+      <input type="text" name="username" placeholder="Uživatelské jméno" required>
+      <input type="password" name="password" placeholder="Heslo" required>
+      <button type="submit" class="btn">Přihlásit se</button>
+    </form>
+    <p style="text-align:center; margin-top:1rem; color:#aaa;">
+      Nemáš účet? <a href="/register">Registrovat se</a>
+    </p>
+  </div>
+</body>
+</html>

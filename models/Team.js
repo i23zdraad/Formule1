@@ -5,7 +5,8 @@ const teamSchema = new mongoose.Schema({
   country: { type: String, required: true },
   founded: { type: Number },
   description: { type: String, required: true },
-  logo: { type: String, default: "" }
+  logo: { type: String, default: "" },      // logo týmu
+  carImage: { type: String, default: "" }   // monopost/tým
 }, { timestamps: true });
 
 module.exports = mongoose.model("Team", teamSchema);

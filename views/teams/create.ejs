@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Nový tým</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include("../partials/navbar") %>
+
+  <div class="container">
+    <h1>Přidat tým</h1>
+    <form action="/teams" method="POST" enctype="multipart/form-data" class="form">
+      <input type="text" name="name" placeholder="Název týmu" required>
+      <input type="text" name="country" placeholder="Země" required>
+      <input type="number" name="founded" placeholder="Rok založení">
+      <textarea name="description" placeholder="Popis týmu" required></textarea>
+
+      <label style="color:#aaa; margin-bottom:0.3rem; display:block;">Logo týmu:</label>
+      <input type="file" name="logo" accept="image/*">
+
+      <label style="color:#aaa; margin-bottom:0.3rem; display:block;">Monopost / tým:</label>
+      <input type="file" name="carImage" accept="image/*">
+
+      <button type="submit" class="btn">Uložit tým</button>
+    </form>
+    <p style="margin-top:1rem"><a href="/teams">Zpět</a></p>
+  </div>
+</body>
+</html>

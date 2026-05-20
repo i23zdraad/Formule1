@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title><%= team.name %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include("../partials/navbar") %>
+
+  <div class="container detail">
+    <div class="detail-images">
+      <% if (team.logo) { %>
+        <img src="/uploads/<%= team.logo %>" alt="Logo">
+      <% } %>
+      <% if (team.carImage) { %>
+        <img src="/uploads/<%= team.carImage %>" alt="Monopost">
+      <% } %>
+    </div>
+
+    <h1><%= team.name %></h1>
+    <p class="subtitle"><%= team.country %> | Založeno <%= team.founded %></p>
+    <p><%= team.description %></p>
+
+    <% if (user) { %>
+      <div class="actions">
+        <a href="/teams/<%= team._id %>/edit" class="btn">Upravit</a>
+        <form action="/teams/<%= team._id %>?_method=DELETE" method="POST" class="inline-form">
+          <button class="btn btn-danger">Smazat</button>
+        </form>
+      </div>
+    <% } %>
+    <p style="margin-top:1rem"><a href="/teams">← Zpět na týmy</a></p>
+  </div>
+</body>
+</html>

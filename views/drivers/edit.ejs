@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Upravit jezdce</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Upravit jezdce</h1>
+    <form action="/drivers/<%= driver._id %>?_method=PUT" method="POST" enctype="multipart/form-data" class="form">
+      <input type="text" name="name" value="<%= driver.name %>" required>
+      <input type="text" name="nationality" value="<%= driver.nationality %>" required>
+      <input type="number" name="age" value="<%= driver.age %>" required>
+      <input type="number" name="number" value="<%= driver.number %>" required>
+
+      <select name="team" required>
+        <option value="">Vyber tým</option>
+        <% teams.forEach(t => { %>
+          <option value="<%= t._id %>" <%= driver.team && driver.team.toString() === t._id.toString() ? "selected" : "" %>>
+            <%= t.name %>
+          </option>
+        <% }) %>
+      </select>
+
+      <textarea name="description" required><%= driver.description %></textarea>
+      <input type="file" name="image" accept="image/*">
+      <button type="submit" class="btn">Uložit změny</button>
+    </form>
+    <p style="margin-top:1rem"><a href="/drivers/<%= driver._id %>">Zpět na detail</a></p>
+  </div>
+</body>
+</html>
