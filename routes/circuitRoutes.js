@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require("multer");
 const path = require("path");
 const circuitController = require("../controllers/circuitController");
-const requireLogin = require("../middlewares/authMiddleware");
+const requireRole = require("../middlewares/roleMiddleware");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "public/uploads/"),
@@ -11,19 +11,14 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// 1. Seznam (musí být před /:id)
+const requireEditor = requireRole("spravce", "admin");
+
 router.get("/", circuitController.getAllCircuits);
-
-// 2. Konkrétní cesty (musí být před /:id)
-router.get("/create", requireLogin, circuitController.showCreateForm);
-router.post("/", requireLogin, upload.single("image"), circuitController.createCircuit);
-
-// 3. Editace (musí být před /:id)
-router.get("/:id/edit", requireLogin, circuitController.showEditForm);
-router.put("/:id", requireLogin, upload.single("image"), circuitController.updateCircuit);
-router.delete("/:id", requireLogin, circuitController.deleteCircuit);
-
-// 4. Detail – VŽDY POSLEDNÍ!
+router.get("/create", requireEditor, circuitController.showCreateForm);
+router.post("/", requireEditor, upload.single("image"), circuitController.createCircuit);
+router.get("/:id/edit", requireEditor, circuitController.showEditForm);
+router.put("/:id", requireEditor, upload.single("image"), circuitController.updateCircuit);
+router.delete("/:id", requireEditor, circuitController.deleteCircuit);
 router.get("/:id", circuitController.getCircuitDetail);
 
 module.exports = router;

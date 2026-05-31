@@ -4,20 +4,15 @@
   <meta charset="UTF-8">
   <title>Správa uživatelů – F1 Tracker</title>
   <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/loader.js" defer></script>
 </head>
 <body>
-  <nav class="navbar">
-    <a href="/circuits" class="logo">F1 Tracker</a>
-    <div class="links">
-      <a href="/circuits">Okruhy</a>
-      <a href="/drivers">Jezdci</a>
-      <a href="/teams">Týmy</a>
-      <a href="/admin/users">Správa uživatelů</a>
-      <form action="/logout" method="POST" class="inline-form">
-        <button class="btn-link">Odhlásit</button>
-      </form>
-    </div>
-  </nav>
+  <div id="loader">
+    <div class="spinner"></div>
+    <div class="loader-text">F1 Tracker</div>
+  </div>
+
+  <%- include("../partials/navbar") %>
 
   <div class="container">
     <h1>Správa uživatelů</h1>
@@ -28,13 +23,19 @@
           <strong><%= oneUser.username %></strong>
           <span style="color:#e10600; font-weight:600;">– role: <%= oneUser.role %></span>
         </p>
-        <form action="/admin/users/<%= oneUser._id %>/role" method="POST" style="display:flex; gap:1rem; align-items:center; margin-top:0.5rem;">
-          <select name="role" style="padding:0.5rem; background:#0f0f0f; color:#fff; border:1px solid #333; border-radius:4px;">
-            <option value="user" <%= oneUser.role === "user" ? "selected" : "" %>>user</option>
-            <option value="admin" <%= oneUser.role === "admin" ? "selected" : "" %>>admin</option>
-          </select>
-          <button type="submit" class="btn">Změnit roli</button>
-        </form>
+
+        <% if (oneUser.role !== "admin" || oneUser._id.toString() === user.id) { %>
+          <form action="/admin/users/<%= oneUser._id %>/role" method="POST" style="display:flex; gap:1rem; align-items:center; margin-top:0.5rem;">
+            <select name="role" style="padding:0.5rem; background:#0f0f0f; color:#fff; border:1px solid #333; border-radius:4px;">
+              <option value="user" <%= oneUser.role === "user" ? "selected" : "" %>>user</option>
+              <option value="spravce" <%= oneUser.role === "spravce" ? "selected" : "" %>>spravce</option>
+              <option value="admin" <%= oneUser.role === "admin" ? "selected" : "" %>>admin</option>
+            </select>
+            <button type="submit" class="btn">Změnit roli</button>
+          </form>
+        <% } else { %>
+          <p style="color:#666; margin-top:0.5rem;">Admin nemůže měnit roli jinému adminovi.</p>
+        <% } %>
       </div>
     <% }) %>
 

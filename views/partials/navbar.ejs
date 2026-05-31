@@ -1,19 +1,20 @@
 <<nav class="navbar">
-  <a href="/circuits" class="logo">F1 Tracker</a>
   <div class="links">
     <a href="/circuits">Okruhy</a>
     <a href="/drivers">Jezdci</a>
     <a href="/teams">Týmy</a>
-    
+
     <% if (user) { %>
-      <a href="/circuits/create">+ Okruh</a>
-      <a href="/drivers/create">+ Jezdec</a>
-      <a href="/teams/create">+ Tým</a>
-      
+      <% if (user.role === "spravce" || user.role === "admin") { %>
+        <a href="/circuits/create">+ Okruh</a>
+        <a href="/drivers/create">+ Jezdec</a>
+        <a href="/teams/create">+ Tým</a>
+      <% } %>
+
       <% if (user.role === "admin") { %>
         <a href="/admin/users">Správa uživatelů</a>
       <% } %>
-      
+
       <form action="/logout" method="POST" class="inline-form">
         <button class="btn-link">Odhlásit (<%= user.username %>)</button>
       </form>
